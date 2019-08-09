@@ -12,7 +12,7 @@ if(isset($_GET['pin']) && isset($_GET['session_id'])){
     if($stmt->rowCount()==1){
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         if($data['pin']==$pin){
-
+            
             $stmt2 = $con->prepare('UPDATE `private_sessions` SET `status`=1 WHERE `id`=?');
             $stmt2->execute([$sessid]);
             echo 'success';
