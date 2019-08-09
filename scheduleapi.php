@@ -14,12 +14,13 @@ if(isset($_GET['id'])){
             $student_id = $row['student'];
             $st = $con->prepare('SELECT * FROM `users` WHERE `id` = ?');
             $st->execute([$student_id]);
-            
+
             $data = $st->fetch(PDO::FETCH_ASSOC);
             $student_name = $data['name'];
             $arr['id'] = $row['id'];
             $arr['student_name'] = $student_name;
             $arr['title'] = $row['title'];
+            $arr['pin'] = $row['pin'];
             $arr['time'] = $row['time'];
             $dd[] = $arr;
         }
