@@ -11,9 +11,19 @@ if(isset($_GET['id'])){
         echo 'nodata';
     } else {
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $arr[] = $row;
+            $tutor_id = $row['tutor'];
+            $st = $con->prepare('SELECT * FROM `users` WHERE `id` = ?');
+            $st->execute([$tutor_id]);
+
+            $data = $st->fetch(PDO::FETCH_ASSOC);
+            $tutor_name = $data['name'];
+            $arr['id'] = $row['id'];
+            $arr['tutor_name'] = $tutor_name;
+            $arr['title'] = $row['title'];
+            $arr['time'] = $row['time'];
+            $dd[] = $arr;
         }
-        echo json_encode($arr);
+        echo json_encode($dd);
     }
 } else {
     echo 'errset';
