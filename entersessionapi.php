@@ -17,14 +17,17 @@ if(isset($_GET['pin']) && isset($_GET['session_id']) && isset($_GET['rating'])){
             $stmt2 = $con->prepare('UPDATE `private_sessions` SET `status`=1 WHERE `id`=?');
             $stmt2->execute([$sessid]);
 
-            $stmt3 = $con->prepare('SELECT `rating` FROM `users` WHERE `id`=?');
+            $stmt3 = $con->prepare('SELECT `rating`, `jumlah` FROM `users` WHERE `id`=?');
             $stmt3->execute([$data['tutor']]);
 
             $dt = $stmt3->fetch(PDO::FETCH_ASSOC);
-            $m = ($dt['rating']+$rating)/2.0;
+            $jml = $dt['jumlah'];
+            $m = ($jml*$dt['rating']+$rating)/($jml+1);
 
             $stmt4 = $con->prepare('UPDATE `users` SET `rating`=? WHERE `id`=?');
-            $stmt4->execute([$m, $data['tutor']]);
+            $stmt4->execute([$m,$data['tutor']]);
+            $stmt5 = $con->prepare('UPDATE `users` SET `jumlah`=? WHERE `id`=?');
+            $stmt5->execute([$jml+1,$data['tutor']]);
             echo 'success';
         } else {
             echo 'wrongpin';
