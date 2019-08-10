@@ -18,4 +18,4 @@ Silakan baca [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c
 
 - Ruby DECRYPT 2018
 
-Lihat juga daftar [kontributor](https://github.com/William9923/dr_ganesha/contributors) yang ikut andil dalam proyek ini.
+Lihat juga daftar [kontributor](https://github.com/junchh/drganesha_backend/graphs/contributors) yang ikut andil dalam proyek ini.
